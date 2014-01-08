@@ -35,8 +35,12 @@
           tincidunt pellentesque sapien, a tempor eros semper ut.
         </p>
       </div>
-      <div id="comments"></div>
-      <script>React.renderComponent(CommentBox({}), $("#comments").get(0))</script>
+      <div class="comments"></div>
+      <script>
+        $.each( $(".comments"), function(i, el) {
+          React.renderComponent(CommentBox({}), el);
+        });
+      </script>
     </section>
   </div>
 </div>
