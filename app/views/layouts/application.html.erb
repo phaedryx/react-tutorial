@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ReactTutorial</title>
+  <title>React Tutorial</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="layout" class="pure-g-r">
+    <div class="sidebar pure-u">
+      <header class="header">
+        <hgroup>
+          <h1 class="brand-title">Example Blog</h1>
+          <h2 class="brand-tagline">with react comments</h2>
+        </hgroup>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="pure-button" href="http://facebook.github.io/react/index.html">React</a>
+            </li>
+            <li class="nav-item">
+              <a class="pure-button" href="http://purecss.io">Pure</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <div class="pure-u-1">
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <script src="http://fb.me/react-0.8.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>
