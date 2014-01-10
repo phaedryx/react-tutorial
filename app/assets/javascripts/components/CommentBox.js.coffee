@@ -1,4 +1,4 @@
-{div, form, h3, h4, p, span, textarea} = React.DOM
+{br, div, form, h3, h4, input, p, span, textarea} = React.DOM
 
 Comment = React.createClass
   render: ->
@@ -14,10 +14,16 @@ CommentList = React.createClass
       Comment({author: 'Tad'})
 
 CommentForm = React.createClass
+  submit: ->
+    alert("submit!")
+
   render: ->
-    form className: 'comment-form',
-      textarea {},
-        'Hello World, I am a CommentForm'
+    form className: 'comment-form', onSubmit: @submit,
+      input type: 'text', placeholder: 'your name', ref: 'author'
+      br {}
+      textarea placeholder: 'your comment'
+      br {}
+      input type: 'submit', value: 'post'
 
 CommentBox = React.createClass
   render: ->
