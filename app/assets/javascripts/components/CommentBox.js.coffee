@@ -15,13 +15,15 @@ CommentList = React.createClass
 
 CommentForm = React.createClass
   submit: ->
-    alert("submit!")
+    {author, comment} = @refs
+    alert "#{author.state.value} said: #{comment.state.value}"
+    false
 
   render: ->
     form className: 'comment-form', onSubmit: @submit,
       input type: 'text', placeholder: 'your name', ref: 'author'
       br {}
-      textarea placeholder: 'your comment'
+      textarea placeholder: 'your comment', ref: 'comment'
       br {}
       input type: 'submit', value: 'post'
 
