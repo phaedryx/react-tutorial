@@ -1,4 +1,6 @@
-{br, div, form, h3, h4, hr, input, p, span, textarea} = React.DOM
+{div, hr, span}                = React.DOM
+{h2, h3, h4}                   = React.DOM
+{form, label, input, textarea} = React.DOM
 
 Comment = React.createClass
   render: ->
@@ -21,12 +23,15 @@ CommentForm = React.createClass
     false
 
   render: ->
-    form className: 'comment-form', onSubmit: @submit,
-      input type: 'text', placeholder: 'your name', ref: 'author'
-      br {}
-      textarea placeholder: 'your comment', ref: 'comment'
-      br {}
-      input type: 'submit', value: 'post'
+    form className: 'pure-form pure-form-aligned', onSubmit: @submit,
+      div className: 'pure-control-group',
+        label for: 'author', 'Name'
+        input type: 'text', placeholder: 'your name', ref: 'author'
+      div className: 'pure-control-group',
+        label for: 'comment', 'Comment'
+        textarea placeholder: 'your comment', ref: 'comment'
+      div className: 'pure-controls',
+        input className: 'pure-button pure-button-primary', type: 'submit', value: 'post'
 
 CommentBox = React.createClass
   render: ->
