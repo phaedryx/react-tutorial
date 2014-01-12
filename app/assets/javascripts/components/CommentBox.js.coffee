@@ -11,9 +11,9 @@ data = [
 Comment = React.createClass
   render: ->
     div className: 'comment',
-      h4 className: 'author',
+      h4 className: 'comment-author',
         @props.author
-      span {}
+      div className: 'comment-content',
         @props.content
 
 CommentList = React.createClass
