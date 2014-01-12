@@ -1,6 +1,12 @@
-{div, hr, span}                = React.DOM
+{div, span}                = React.DOM
 {h2, h3, h4}                   = React.DOM
 {form, label, input, textarea} = React.DOM
+
+data = [
+  {author: "Pete Hunt", content: "This is one comment"},
+  {author: "Jordan Walke", content: "This is *another* comment"},
+  {author: 'Tad', content: 'this is neat'}
+]
 
 Comment = React.createClass
   render: ->
@@ -8,18 +14,20 @@ Comment = React.createClass
       h4 className: 'author',
         @props.author
       span {}
-        @props.comment
-      hr {}
+        @props.content
 
 CommentList = React.createClass
   render: ->
+    nodes = @props.comments.map (comment) ->
+      {author, content} = comment
+      Comment({author: author, content: content})
     div className: 'comment-list',
-      Comment({author: 'Tad', comment: 'this is neat'})
+      nodes
 
 CommentForm = React.createClass
   submit: ->
-    {author, comment} = @refs
-    alert "#{author.state.value} said: #{comment.state.value}"
+    {author, content} = @refs
+    alert "#{author.state.value} said: #{content.state.value}"
     false
 
   render: ->
@@ -29,15 +37,24 @@ CommentForm = React.createClass
         input type: 'text', placeholder: 'your name', ref: 'author'
       div className: 'pure-control-group',
         label for: 'comment', 'Comment'
-        textarea placeholder: 'your comment', ref: 'comment'
+        textarea placeholder: 'your comment', ref: 'content'
       div className: 'pure-controls',
         input className: 'pure-button pure-button-primary', type: 'submit', value: 'post'
 
 CommentBox = React.createClass
+  getInitialState: ->
+    {comments: []}
+  componentWillMount: ->
+    $.ajax(
+      url: @props.url
+      dataType: 'json'
+      success: (results) => @setState {comments: results.comments}
+      error: -> console.log "there was an error"
+    )
   render: ->
     div className: 'comment-box',
       h3 {}, 'Comments'
-      CommentList()
+      CommentList({comments: @state.comments})
       CommentForm()
 
 window.CommentBox = CommentBox

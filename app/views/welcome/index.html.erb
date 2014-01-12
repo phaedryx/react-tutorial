@@ -36,7 +36,11 @@
         </p>
       </div>
       <div id="comments"></div>
-      <script>React.renderComponent(CommentBox(), document.getElementById('comments'));</script>
+      <script>
+        React.renderComponent(
+          CommentBox({url: 'api/comments'}),
+          document.getElementById('comments')
+        );
       </script>
     </section>
   </div>
