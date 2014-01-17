@@ -27,7 +27,12 @@ CommentList = React.createClass
 CommentForm = React.createClass
   submit: ->
     {author, content} = @refs
-    alert "#{author.state.value} said: #{content.state.value}"
+    @props.submit(
+      author: author.state.value
+      content: content.state.value
+    )
+    author.getDOMNode().value = ''
+    content.getDOMNode().value = ''
     false
 
   render: ->
@@ -51,10 +56,12 @@ CommentBox = React.createClass
       success: (results) => @setState {comments: results.comments}
       error: -> console.log "there was an error"
     )
+  submit: (comment) ->
+    $.post(@props.url, comment: comment, authenticity_token: window._auth_token)
   render: ->
     div className: 'comment-box',
       h3 {}, 'Comments'
       CommentList({comments: @state.comments})
-      CommentForm()
+      CommentForm({submit: @submit})
 
 window.CommentBox = CommentBox

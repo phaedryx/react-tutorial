@@ -8,6 +8,7 @@
   <script src="http://fb.me/react-0.8.0.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <%= javascript_include_tag "application" %>
+  <%= javascript_tag "window._auth_token = '#{form_authenticity_token}'" %>
 </head>
 <body>
   <div id="layout" class="pure-g-r">
