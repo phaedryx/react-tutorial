@@ -38,7 +38,7 @@
       <div id="comments"></div>
       <script>
         React.renderComponent(
-          CommentBox({url: '/comments'}),
+          CommentBox({url: '/comments', pollInterval: 2000}),
           document.getElementById('comments')
         );
       </script>

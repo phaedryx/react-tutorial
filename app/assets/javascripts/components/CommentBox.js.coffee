@@ -1,12 +1,6 @@
-{div, span}                = React.DOM
+{div, span}                    = React.DOM
 {h2, h3, h4}                   = React.DOM
 {form, label, input, textarea} = React.DOM
-
-data = [
-  {author: "Pete Hunt", content: "This is one comment"},
-  {author: "Jordan Walke", content: "This is *another* comment"},
-  {author: 'Tad', content: 'this is neat'}
-]
 
 Comment = React.createClass
   render: ->
@@ -49,15 +43,22 @@ CommentForm = React.createClass
 CommentBox = React.createClass
   getInitialState: ->
     {comments: []}
-  componentWillMount: ->
+
+  loadCommentsFromServer: ->
     $.ajax(
       url: @props.url
       dataType: 'json'
       success: (results) => @setState {comments: results.comments}
       error: -> console.log "there was an error"
     )
+
   submit: (comment) ->
     $.post(@props.url, comment: comment, authenticity_token: window._auth_token)
+
+  componentWillMount: ->
+    @loadCommentsFromServer()
+    setInterval(@loadCommentsFromServer, @props.pollInterval)
+
   render: ->
     div className: 'comment-box',
       h3 {}, 'Comments'
