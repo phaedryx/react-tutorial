@@ -1,3 +1,9 @@
+<% content_for :javascript do %>
+  React.renderComponent(
+    CommentBox({url: '/comments', pollInterval: 2000}),
+    document.getElementById('comments')
+  );
+<% end %>
 <div class='pure-u-1'>
   <div class="posts">
     <h1 class="content-subhead">Welcome</h1>
@@ -36,12 +42,6 @@
         </p>
       </div>
       <div id="comments"></div>
-      <script>
-        React.renderComponent(
-          CommentBox({url: '/comments', pollInterval: 2000}),
-          document.getElementById('comments')
-        );
-      </script>
     </section>
   </div>
 </div>

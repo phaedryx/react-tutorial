@@ -3,12 +3,8 @@
 <head>
   <title>React Tutorial</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
-  <script src="http://fb.me/react-0.8.0.js"></script>
-  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_tag "window._auth_token = '#{form_authenticity_token}'" %>
 </head>
 <body>
   <div id="layout" class="pure-g-r">
@@ -37,4 +33,9 @@
     </div>
   </div>
 </body>
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<%= javascript_tag "window._auth_token = '#{form_authenticity_token}'" %>
+<%= javascript_include_tag "application" %>
+<script><%= yield :javascript %></script>
 </html>
